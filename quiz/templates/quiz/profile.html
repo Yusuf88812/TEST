@@ -1,0 +1,61 @@
+{% extends 'quiz/base.html' %}
+
+{% block content %}
+<div class="animate-fade-in">
+    <div class="profile-header">
+        <div class="avatar-circle">
+            {{ user.username|slice:":1"|upper }}
+        </div>
+        <div>
+            <h1>{{ user.username }}</h1>
+            <p style="margin-bottom: 0;">Foydalanuvchi hisobi</p>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-2" style="margin-bottom: 3rem;">
+        <div class="card result-stat-card">
+            <div class="stat-value">{{ total_attempts }}</div>
+            <div class="stat-label">Jami Urinishlar</div>
+        </div>
+        <div class="card result-stat-card">
+            <div class="stat-value">{{ total_score }}</div>
+            <div class="stat-label">Jami Ball</div>
+        </div>
+    </div>
+
+    <h2 style="margin-bottom: 1.5rem;">So'nggi Natijalar</h2>
+
+    <div class="card" style="padding: 1rem;">
+        {% if attempts %}
+        {% for attempt in attempts %}
+        <div class="history-item">
+            <div>
+                <div style="font-weight: 600; font-size: 1.1rem; color: var(--text-main);">
+                    {{ attempt.module.subject.name }} - {{ attempt.module.name }}
+                </div>
+                <div class="history-date">
+                    {{ attempt.date_taken|date:"d.m.Y H:i" }}
+                </div>
+            </div>
+            <div style="text-align: right;">
+                <div style="font-weight: 700; color: var(--primary); font-size: 1.25rem;">
+                    {{ attempt.score }} ball
+                </div>
+                <div style="font-size: 0.875rem; color: var(--text-muted);">
+                    {{ attempt.correct_answers }} / {{ attempt.total_questions }}
+                </div>
+            </div>
+            <div style="margin-left: 1rem;">
+                <a href="{% url 'quiz:test_result' attempt.id %}" class="btn btn-secondary"
+                    style="padding: 0.5rem 1rem; font-size: 0.75rem;">
+                    Ko'rish
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <p style="padding: 2rem; text-align: center;">Hozircha testlar topshirilmagan.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

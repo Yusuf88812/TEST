@@ -1,0 +1,117 @@
+{% extends 'quiz/base.html' %}
+
+{% block content %}
+<div class="row" style="position: relative;">
+    <!-- Timer Widget -->
+    <div class="timer-fixed">
+        <div class="timer-card" id="timerCard">
+            <i class="fas fa-stopwatch"></i>
+            <span id="timer">00:00</span>
+        </div>
+    </div>
+
+    <div class="container" style="max-width: 800px;">
+        <div style="margin-bottom: 2rem;">
+            <h1>{{ module.name }}</h1>
+            <p>Fan: {{ module.subject.name }} | Nomzod: <span style="color: var(--primary);">{{
+                    request.user.get_full_name|default:request.user.username }}</span></p>
+        </div>
+
+        <form method="post" id="quizForm">
+            {% csrf_token %}
+
+            {% for question in questions %}
+            <div class="question-card animate-fade-in"
+                style="animation-delay: {{ forloop.counter0|add:1|default:1|floatformat:0|stringformat:'d' }}00ms;">
+                <div style="margin-bottom: 1rem; color: var(--text-muted); font-size: 0.875rem;">
+                    Savol {{ forloop.counter }} / {{ questions|length }}
+                    <span style="float: right;">{{ question.marks }} ball</span>
+                </div>
+
+                <div class="question-text">
+                    {{ question.text|linebreaks }}
+                </div>
+
+                {% if question.image %}
+                <div style="margin-bottom: 1.5rem;">
+                    <img src="{{ question.image.url }}" alt="Question Image"
+                        style="max-width: 100%; border-radius: var(--radius-md);">
+                </div>
+                {% endif %}
+
+                {% if question.question_type == 'MCQ' %}
+                <div class="choices-list">
+                    {% for choice in question.choices.all %}
+                    <div style="margin-bottom: 0.5rem;">
+                        <input type="radio" name="question_{{ question.id }}" id="choice_{{ choice.id }}"
+                            value="{{ choice.id }}" class="choice-input">
+                        <label for="choice_{{ choice.id }}" class="choice-label">
+                            <span class="choice-marker"></span>
+                            {{ choice.text }}
+                        </label>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% elif question.question_type == 'CODE' %}
+                <div class="form-group">
+                    <label for="code_{{ question.id }}" class="form-label">Kodingizni shu yerga yozing:</label>
+                    <textarea name="code_answer_{{ question.id }}" id="code_{{ question.id }}" class="form-control"
+                        rows="6" style="font-family: var(--font-mono); font-size: 0.9em; tab-size: 4;"></textarea>
+                </div>
+                {% endif %}
+            </div>
+            {% endfor %}
+
+            <div style="margin-top: 3rem; margin-bottom: 4rem; text-align: center;">
+                <button type="submit" class="btn btn-primary" style="padding: 1rem 3rem; font-size: 1.125rem;">
+                    <i class="fas fa-check-circle" style="margin-right: 0.5rem;"></i> Testni Yakunlash
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    // Timer Logic
+    let totalSeconds = parseInt("{{ remaining_seconds|floatformat:0 }}");
+    const timerDisplay = document.getElementById('timer');
+    const timerCard = document.getElementById('timerCard');
+    const quizForm = document.getElementById('quizForm');
+
+    function updateTimer() {
+        const minutes = Math.floor(totalSeconds / 60);
+        const seconds = totalSeconds % 60;
+
+        timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+
+        if (totalSeconds <= 60) {
+            timerCard.classList.add('timer-warning');
+        }
+
+        if (totalSeconds <= 0) {
+            clearInterval(timerInterval);
+            timerDisplay.textContent = "00:00";
+            alert("Vaqt tugadi! Javoblar avtomatik yuborilmoqda.");
+            quizForm.submit();
+        } else {
+            totalSeconds--;
+        }
+    }
+
+    // Initial call
+    updateTimer();
+    const timerInterval = setInterval(updateTimer, 1000);
+
+    // Prevent accidental navigation
+    window.onbeforeunload = function () {
+        // Only warn if not submitting
+        // We can't easy detect if it is form submit here without flag, 
+        // but for now let's just leave it or handle simple warning.
+        // return "Test jarayoni to'xtatiladi. Ishonchingiz komilmi?"; 
+    };
+
+    quizForm.onsubmit = function () {
+        window.onbeforeunload = null;
+    };
+</script>
+{% endblock %}

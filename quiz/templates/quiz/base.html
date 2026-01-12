@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uz">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}DevQuiz - Dasturlashni o'rganing{% endblock %}</title>
+    <!-- Fonts & Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="{% url 'quiz:home' %}" class="nav-brand">
+                <i class="fas fa-code-branch"></i> DevQuiz
+            </a>
+            <div class="nav-links">
+                <a href="{% url 'quiz:home' %}" class="nav-link">Bosh sahifa</a>
+                <a href="{% url 'quiz:leaderboard' %}" class="nav-link">Reyting</a>
+                {% if user.is_authenticated %}
+                <span class="nav-link" style="opacity: 0.7;">{{ user.username }}</span>
+                <form action="{% url 'accounts:logout' %}" method="post" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="nav-link btn-link"
+                        style="background:none; border:none; cursor:pointer;">Chiqish</button>
+                </form>
+                {% else %}
+                <a href="{% url 'accounts:login' %}" class="nav-link">Kirish</a>
+                <a href="{% url 'accounts:signup' %}" class="btn btn-primary"
+                    style="padding: 0.5rem 1rem; border-radius: 20px;">Ro'yxatdan o'tish</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container" style="flex: 1; padding-top: 2rem; padding-bottom: 2rem;">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; {% now "Y" %} DevQuiz Platformasi. Barcha huquqlar himoyalangan.</p>
+            <p style="font-size: 0.875rem; margin-top: 0.5rem; opacity: 0.7;">
+                O'zbekistonning eng zamonaviy dasturlash test platformasi
+            </p>
+        </div>
+    </footer>
+
+</body>
+
+</html>

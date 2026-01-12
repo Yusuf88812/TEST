@@ -1,0 +1,49 @@
+{% extends 'quiz/base.html' %}
+
+{% block content %}
+<div class="hero animate-fade-in">
+    <h1>Bilimingizni Sinovdan O'tkazing</h1>
+    <p>Django, Python va boshqa dasturlash tillari bo'yicha eng mukammal test platformasi. O'zingizni rivojlantiring va
+        natijalaringizni kuzatib boring.</p>
+    <a href="#subjects" class="btn btn-primary">Boshlash <i class="fas fa-arrow-right"
+            style="margin-left: 0.5rem;"></i></a>
+</div>
+
+<div id="subjects" class="animate-fade-in" style="animation-delay: 0.2s;">
+    <h2 style="margin-bottom: 2rem; text-align: center;">Mavjud fanlar</h2>
+
+    <div class="grid grid-cols-2">
+        {% for subject in subjects %}
+        <div class="card">
+            <div class="card-body">
+                {% if subject.image %}
+                <img src="{{ subject.image.url }}" alt="{{ subject.name }}"
+                    style="width: 100%; height: 200px; object-fit: cover; border-radius: var(--radius-md); margin-bottom: 1.5rem;">
+                {% else %}
+                <div
+                    style="width: 100%; height: 200px; background: rgba(99, 102, 241, 0.1); border-radius: var(--radius-md); margin-bottom: 1.5rem; display: flex; align-items: center; justify-content: center;">
+                    <i class="fas fa-book fa-3x" style="color: var(--primary);"></i>
+                </div>
+                {% endif %}
+
+                <h3 class="card-title">{{ subject.name }}</h3>
+                <p style="margin-bottom: 1.5rem;">{{ subject.description|truncatewords:20 }}</p>
+
+                <div class="d-flex justify-content-between align-items-center">
+                    <span class="badge badge-primary">{{ subject.modules.count }} ta modul</span>
+                    <a href="{% url 'quiz:subject_detail' subject.slug %}" class="btn btn-secondary">
+                        Kirish <i class="fas fa-chevron-right" style="margin-left: 0.5rem;"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="card" style="grid-column: 1 / -1; text-align: center; padding: 4rem;">
+            <i class="fas fa-folder-open fa-3x" style="color: var(--text-muted); margin-bottom: 1rem;"></i>
+            <h3>Hozircha fanlar mavjud emas</h3>
+            <p>Admin tomonidan fanlar qo'shilishini kuting.</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

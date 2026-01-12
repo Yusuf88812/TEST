@@ -1,0 +1,30 @@
+{% extends 'quiz/base.html' %}
+
+{% block content %}
+<div class="auth-container">
+    <div class="auth-card animate-fade-in">
+        <h2 class="text-center mb-4">Ro'yxatdan o'tish</h2>
+
+        <form method="post" action="{% url 'accounts:signup' %}">
+            {% csrf_token %}
+            {% for field in form %}
+            <div class="form-group">
+                <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+                {{ field }}
+                {% if field.errors %}
+                <div class="text-danger" style="font-size: 0.875rem; margin-top: 0.25rem;">
+                    {{ field.errors.0 }}
+                </div>
+                {% endif %}
+            </div>
+            {% endfor %}
+            <button type="submit" class="btn btn-primary" style="width: 100%;">Ro'yxatdan o'tish</button>
+        </form>
+
+        <div class="text-center mt-4">
+            <p class="text-muted">Akkauntingiz bormi? <a href="{% url 'accounts:login' %}" class="text-primary"
+                    style="font-weight: 500;">Kirish</a></p>
+        </div>
+    </div>
+</div>
+{% endblock %}
