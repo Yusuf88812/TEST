@@ -33,33 +33,53 @@ def take_test(request, module_id):
         attempt = TestAttempt.objects.create(
             module=module,
             user=request.user,
-            total_questions=module.questions.count(),
+            total_questions=20, # Always 20 questions
             start_time=timezone.now()
         )
+        
+        # Select 20 random questions for this attempt
+        import random
+        all_questions = list(module.questions.all())
+        # If less than 20, take all, otherwise take 20 random
+        selected_questions = random.sample(all_questions, min(len(all_questions), 20))
+        
+        # Create persistent answer placeholders for these questions
+        for question in selected_questions:
+            TestAnswer.objects.create(
+                attempt=attempt,
+                question=question
+            )
     
-    # If attempt is already completed (should use the filtered query above, but just in case of race/logic)
     if attempt.completed:
         return redirect('quiz:test_result', attempt_id=attempt.id)
 
-    questions = module.questions.all().prefetch_related('choices')
+    # Get the questions associated with this specific attempt
+    # We order by ID strictly to keep them consistent during the attempt
+    # or random order if desired, but consistent per refresh 
+    attempt_answers = attempt.answers.all().select_related('question').order_by('id')
+    questions = [answer.question for answer in attempt_answers]
+    
+    # Prefetch choices for these specific questions to avoid N+1
+    # Since we have question objects, we need to fetch choices efficiently.
+    # The template iterates question.choices.all. 
+    # We can rely on Django's caching or prefetch manually but for now let's leave it simple
+    # as we already have the question objects. Ideally we would prefetch_related_objects(questions, 'choices')
+    from django.db.models import prefetch_related_objects
+    prefetch_related_objects(questions, 'choices')
 
     # Check timer
     elapsed_time = (timezone.now() - attempt.start_time).total_seconds()
     time_limit_seconds = module.duration * 60
     remaining_seconds = max(0, time_limit_seconds - elapsed_time)
     
-    # Auto-submit if time is up (handled by frontend usually, but backend check is good)
-    # logic: if post or time up...
-    
     if request.method == 'POST':
         # PROCESS SUBMISSION
         score = 0
         correct_count = 0
         
-        # Clear old answers for this attempt before saving new
-        attempt.answers.all().delete()
-        
-        for question in questions:
+        # We process the EXISTING TestAnswer objects for this attempt
+        for answer in attempt_answers:
+            question = answer.question
             selected_choice_id = request.POST.get(f'question_{question.id}')
             is_correct = False
             selected_choice = None
@@ -77,17 +97,13 @@ def take_test(request, module_id):
                         pass
             elif question.question_type == 'CODE':
                 code_answer = request.POST.get(f'code_answer_{question.id}')
-                # Manual grading needed, or default correct? 
-                # Let's mark as 0 score for now until graded.
                 pass
             
-            TestAnswer.objects.create(
-                attempt=attempt,
-                question=question,
-                selected_choice=selected_choice,
-                code_answer=code_answer,
-                is_correct=is_correct
-            )
+            # Update the existing answer object
+            answer.selected_choice = selected_choice
+            answer.code_answer = code_answer
+            answer.is_correct = is_correct
+            answer.save()
             
         attempt.score = score
         attempt.correct_answers = correct_count

@@ -10,6 +10,19 @@
         </div>
     </div>
 
+    <!-- Progress Widget -->
+    <div
+        style="position: fixed; top: 1rem; left: 50%; transform: translateX(-50%); z-index: 1000; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); padding: 0.75rem 1.5rem; border-radius: 9999px; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); display: flex; align-items: center; gap: 1rem; border: 1px solid rgba(0,0,0,0.05);">
+        <div style="font-weight: 600; color: var(--primary); white-space: nowrap;">
+            Javoblar: <span id="answered-count">0</span> / {{ questions|length }}
+        </div>
+        <div style="width: 120px; height: 8px; background: #f3f4f6; border-radius: 4px; overflow: hidden;">
+            <div id="progress-bar-fill"
+                style="width: 0%; height: 100%; background: linear-gradient(90deg, var(--primary), #4f46e5); transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1); border-radius: 4px;">
+            </div>
+        </div>
+    </div>
+
     <div class="container" style="max-width: 800px;">
         <div style="margin-bottom: 2rem;">
             <h1>{{ module.name }}</h1>
@@ -113,5 +126,47 @@
     quizForm.onsubmit = function () {
         window.onbeforeunload = null;
     };
+
+    // Progress Logic
+    const totalQuestions = {{ questions| length }};
+    const choiceInputs = document.querySelectorAll('.choice-input');
+    const textInputs = document.querySelectorAll('textarea');
+    const answeredCountSpan = document.getElementById('answered-count');
+    const progressBarFill = document.getElementById('progress-bar-fill');
+
+    function updateProgress() {
+        let answered = 0;
+        // Count unique answered questions
+        const answeredNames = new Set();
+
+        choiceInputs.forEach(input => {
+            if (input.checked) {
+                answeredNames.add(input.name);
+            }
+        });
+
+        textInputs.forEach(input => {
+            if (input.value.trim().length > 0) {
+                // Assumes unique names for text areas
+                answeredNames.add(input.name);
+            }
+        });
+
+        const count = answeredNames.size;
+        answeredCountSpan.textContent = count;
+        const percent = (count / totalQuestions) * 100;
+        progressBarFill.style.width = `${percent}%`;
+
+        // Visual feedback on completion
+        if (count === totalQuestions) {
+            progressBarFill.style.background = "#10b981"; // Green
+        }
+    }
+
+    choiceInputs.forEach(input => input.addEventListener('change', updateProgress));
+    textInputs.forEach(input => input.addEventListener('input', updateProgress));
+
+    // Initial check in case of reload
+    updateProgress();
 </script>
 {% endblock %}
