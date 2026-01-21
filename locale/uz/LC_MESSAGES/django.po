@@ -1,0 +1,200 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-10-27 12:00+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: uz\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "DevQuiz - Dasturlashni o'rganing"
+msgstr "DevQuiz - Dasturlashni o'rganing"
+
+msgid "Bosh sahifa"
+msgstr "Bosh sahifa"
+
+msgid "Reyting"
+msgstr "Reyting"
+
+msgid "Chiqish"
+msgstr "Chiqish"
+
+msgid "Kirish"
+msgstr "Kirish"
+
+msgid "Ro'yxatdan o'tish"
+msgstr "Ro'yxatdan o'tish"
+
+msgid "DevQuiz Platformasi. Barcha huquqlar himoyalangan."
+msgstr "DevQuiz Platformasi. Barcha huquqlar himoyalangan."
+
+msgid "O'zbekistonning eng zamonaviy dasturlash test platformasi"
+msgstr "O'zbekistonning eng zamonaviy dasturlash test platformasi"
+
+msgid "Bilimingizni Sinovdan O'tkazing"
+msgstr "Bilimingizni Sinovdan O'tkazing"
+
+msgid "Django, Python va boshqa dasturlash tillari bo'yicha eng mukammal test platformasi. O'zingizni rivojlantiring va natijalaringizni kuzatib boring."
+msgstr "Django, Python va boshqa dasturlash tillari bo'yicha eng mukammal test platformasi. O'zingizni rivojlantiring va natijalaringizni kuzatib boring."
+
+msgid "Boshlash"
+msgstr "Boshlash"
+
+msgid "Mavjud fanlar"
+msgstr "Mavjud fanlar"
+
+msgid "ta modul"
+msgstr "ta modul"
+
+msgid "Hozircha fanlar mavjud emas"
+msgstr "Hozircha fanlar mavjud emas"
+
+msgid "Admin tomonidan fanlar qo'shilishini kuting."
+msgstr "Admin tomonidan fanlar qo'shilishini kuting."
+
+msgid "Foydalanuvchi hisobi"
+msgstr "Foydalanuvchi hisobi"
+
+msgid "Jami Urinishlar"
+msgstr "Jami Urinishlar"
+
+msgid "Jami Ball"
+msgstr "Jami Ball"
+
+msgid "So'nggi Natijalar"
+msgstr "So'nggi Natijalar"
+
+msgid "ball"
+msgstr "ball"
+
+msgid "Ko'rish"
+msgstr "Ko'rish"
+
+msgid "Hozircha testlar topshirilmagan."
+msgstr "Hozircha testlar topshirilmagan."
+
+msgid "O'rin"
+msgstr "O'rin"
+
+msgid "Foydalanuvchi"
+msgstr "Foydalanuvchi"
+
+msgid "Modul"
+msgstr "Modul"
+
+msgid "Ball"
+msgstr "Ball"
+
+msgid "Vaqt"
+msgstr "Vaqt"
+
+msgid "Hozircha natijalar yo'q."
+msgstr "Hozircha natijalar yo'q."
+
+msgid "Testni Boshlash"
+msgstr "Testni Boshlash"
+
+msgid "Ismingiz"
+msgstr "Ismingiz"
+
+msgid "Ismingizni kiriting"
+msgstr "Ismingizni kiriting"
+
+msgid "Familiyangiz"
+msgstr "Familiyangiz"
+
+msgid "Familiyangizni kiriting"
+msgstr "Familiyangizni kiriting"
+
+#, python-format
+msgid "Sizga %(duration)s daqiqa vaqt beriladi."
+msgstr "Sizga %(duration)s daqiqa vaqt beriladi."
+
+msgid "Bekor Qilish"
+msgstr "Bekor Qilish"
+
+msgid "Orqaga"
+msgstr "Orqaga"
+
+msgid "Qiyinlik Darajalari"
+msgstr "Qiyinlik Darajalari"
+
+msgid "daqiqa"
+msgstr "daqiqa"
+
+msgid "ta savol"
+msgstr "ta savol"
+
+msgid "Ushbu fan bo'yicha testlar hali mavjud emas."
+msgstr "Ushbu fan bo'yicha testlar hali mavjud emas."
+
+msgid "Javoblar"
+msgstr "Javoblar"
+
+msgid "Fan"
+msgstr "Fan"
+
+msgid "Nomzod"
+msgstr "Nomzod"
+
+msgid "Savol"
+msgstr "Savol"
+
+msgid "Kodingizni shu yerga yozing:"
+msgstr "Kodingizni shu yerga yozing:"
+
+msgid "Testni Yakunlash"
+msgstr "Testni Yakunlash"
+
+msgid "Vaqt tugadi! Javoblar avtomatik yuborilmoqda."
+msgstr "Vaqt tugadi! Javoblar avtomatik yuborilmoqda."
+
+msgid "Test Natijalari"
+msgstr "Test Natijalari"
+
+msgid "Jami Savollar"
+msgstr "Jami Savollar"
+
+msgid "Batafsil Ko'rish"
+msgstr "Batafsil Ko'rish"
+
+msgid "Bosh Sahifa"
+msgstr "Bosh Sahifa"
+
+msgid "Natijalar Tahlili"
+msgstr "Natijalar Tahlili"
+
+msgid "Test yakunlandi"
+msgstr "Test yakunlandi"
+
+msgid "To'g'ri"
+msgstr "To'g'ri"
+
+msgid "Noto'g'ri"
+msgstr "Noto'g'ri"
+
+msgid "Sizning javobingiz:"
+msgstr "Sizning javobingiz:"
+
+msgid "Javob belgilanmagan"
+msgstr "Javob belgilanmagan"
+
+msgid "To'g'ri javob:"
+msgstr "To'g'ri javob:"
+
+msgid "Sizning yechimingiz:"
+msgstr "Sizning yechimingiz:"
+
+msgid "O'zbek"
+msgstr "O'zbek"
+
+msgid "Русский"
+msgstr "Русский"
+
+msgid "English"
+msgstr "English"

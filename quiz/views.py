@@ -122,7 +122,21 @@ def take_test(request, module_id):
 
 def test_result(request, attempt_id):
     attempt = get_object_or_404(TestAttempt, pk=attempt_id)
-    return render(request, 'quiz/test_result.html', {'attempt': attempt})
+    
+    # Calculate results safely
+    total_marks = attempt.module.questions.aggregate(Sum('marks'))['marks__sum'] or 0
+    percentage = 0
+    if total_marks > 0:
+        percentage = (attempt.score / total_marks) * 100
+        
+    passed = percentage >= 60
+    
+    return render(request, 'quiz/test_result.html', {
+        'attempt': attempt,
+        'percentage': round(percentage, 1),
+        'passed': passed,
+        'total_marks': total_marks
+    })
 
 def test_result_detail(request, attempt_id):
     attempt = get_object_or_404(TestAttempt, pk=attempt_id)

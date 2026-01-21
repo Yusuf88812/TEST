@@ -1,25 +1,25 @@
 {% extends 'quiz/base.html' %}
-{% load static %}
+{% load static i18n %}
 
 {% block content %}
 <div class="animate-fade-in">
     <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 2rem;">
-        <h1>Reyting</h1>
+        <h1>{% trans "Reyting" %}</h1>
         <a href="{% url 'quiz:home' %}" class="btn btn-secondary">
-            <i class="fas fa-home"></i> Bosh sahifa
+            <i class="fas fa-home"></i> {% trans "Bosh sahifa" %}
         </a>
     </div>
 
     <div class="card" style="padding: 0; overflow: hidden;">
         <div style="overflow-x: auto;">
-            <table class="leaderboard-table">
+            <table class="leaderboard-table" style="width: 100%; text-align: left; border-collapse: collapse;">
                 <thead>
                     <tr>
-                        <th style="width: 80px; text-align: center;">O'rin</th>
-                        <th>Foydalanuvchi</th>
-                        <th>Modul</th>
-                        <th>Ball</th>
-                        <th>Vaqt</th>
+                        <th style="width: 80px; text-align: center;">{% trans "O'rin" %}</th>
+                        <th>{% trans "Foydalanuvchi" %}</th>
+                        <th>{% trans "Modul" %}</th>
+                        <th>{% trans "Ball" %}</th>
+                        <th>{% trans "Vaqt" %}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -40,7 +40,7 @@
                             {% endif %}
                         </td>
                         <td>
-                            <div class="d-flex align-items-center gap-3">
+                            <div class="d-flex align-items-center gap-3" style="padding: 0.5rem 0;">
                                 <div
                                     style="width: 32px; height: 32px; background: rgba(99, 102, 241, 0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; color: var(--primary); font-size: 0.8rem;">
                                     {{ attempt.user.username|slice:":1"|upper }}
@@ -63,7 +63,7 @@
                     {% empty %}
                     <tr>
                         <td colspan="5" style="text-align: center; padding: 3rem;">
-                            Hozircha natijalar yo'q.
+                            {% trans "Hozircha natijalar yo'q." %}
                         </td>
                     </tr>
                     {% endfor %}

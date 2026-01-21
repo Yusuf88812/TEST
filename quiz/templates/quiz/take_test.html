@@ -1,5 +1,5 @@
 {% extends 'quiz/base.html' %}
-{% load static %}
+{% load static i18n %}
 
 {% block content %}
 <div class="row" style="position: relative;">
@@ -15,7 +15,7 @@
     <div
         style="position: fixed; top: 1rem; left: 50%; transform: translateX(-50%); z-index: 1000; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); padding: 0.75rem 1.5rem; border-radius: 9999px; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); display: flex; align-items: center; gap: 1rem; border: 1px solid rgba(0,0,0,0.05);">
         <div style="font-weight: 600; color: var(--primary); white-space: nowrap;">
-            Javoblar: <span id="answered-count">0</span> / {{ questions|length }}
+            {% trans "Javoblar" %}: <span id="answered-count">0</span> / {{ questions|length }}
         </div>
         <div style="width: 120px; height: 8px; background: #f3f4f6; border-radius: 4px; overflow: hidden;">
             <div id="progress-bar-fill"
@@ -27,8 +27,9 @@
     <div class="container" style="max-width: 800px;">
         <div style="margin-bottom: 2rem;">
             <h1>{{ module.name }}</h1>
-            <p>Fan: {{ module.subject.name }} | Nomzod: <span style="color: var(--primary);">{{
-                    request.user.get_full_name|default:request.user.username }}</span></p>
+            <p>{% trans "Fan" %}: {{ module.subject.name }} | {% trans "Nomzod" %}: <span
+                    style="color: var(--primary);">{{ request.user.get_full_name|default:request.user.username }}</span>
+            </p>
         </div>
 
         <form method="post" id="quizForm">
@@ -38,8 +39,8 @@
             <div class="question-card animate-fade-in"
                 style="animation-delay: {{ forloop.counter0|add:1|default:1|floatformat:0|stringformat:'d' }}00ms;">
                 <div style="margin-bottom: 1rem; color: var(--text-muted); font-size: 0.875rem;">
-                    Savol {{ forloop.counter }} / {{ questions|length }}
-                    <span style="float: right;">{{ question.marks }} ball</span>
+                    {% trans "Savol" %} {{ forloop.counter }} / {{ questions|length }}
+                    <span style="float: right;">{{ question.marks }} {% trans "ball" %}</span>
                 </div>
 
                 <div class="question-text">
@@ -68,7 +69,8 @@
                 </div>
                 {% elif question.question_type == 'CODE' %}
                 <div class="form-group">
-                    <label for="code_{{ question.id }}" class="form-label">Kodingizni shu yerga yozing:</label>
+                    <label for="code_{{ question.id }}" class="form-label">{% trans "Kodingizni shu yerga yozing:"
+                        %}</label>
                     <textarea name="code_answer_{{ question.id }}" id="code_{{ question.id }}" class="form-control"
                         rows="6" style="font-family: var(--font-mono); font-size: 0.9em; tab-size: 4;"></textarea>
                 </div>
@@ -78,7 +80,7 @@
 
             <div style="margin-top: 3rem; margin-bottom: 4rem; text-align: center;">
                 <button type="submit" class="btn btn-primary" style="padding: 1rem 3rem; font-size: 1.125rem;">
-                    <i class="fas fa-check-circle" style="margin-right: 0.5rem;"></i> Testni Yakunlash
+                    <i class="fas fa-check-circle" style="margin-right: 0.5rem;"></i> {% trans "Testni Yakunlash" %}
                 </button>
             </div>
         </form>
@@ -105,7 +107,7 @@
         if (totalSeconds <= 0) {
             clearInterval(timerInterval);
             timerDisplay.textContent = "00:00";
-            alert("Vaqt tugadi! Javoblar avtomatik yuborilmoqda.");
+            alert("{% trans 'Vaqt tugadi! Javoblar avtomatik yuborilmoqda.' %}");
             quizForm.submit();
         } else {
             totalSeconds--;

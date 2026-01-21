@@ -1,17 +1,16 @@
 {% extends 'quiz/base.html' %}
-{% load static %}
+{% load static i18n %}
 
 {% block content %}
 <div class="hero animate-fade-in">
-    <h1>Bilimingizni Sinovdan O'tkazing</h1>
-    <p>Django, Python va boshqa dasturlash tillari bo'yicha eng mukammal test platformasi. O'zingizni rivojlantiring va
-        natijalaringizni kuzatib boring.</p>
-    <a href="#subjects" class="btn btn-primary">Boshlash <i class="fas fa-arrow-right"
+    <h1>{% trans "Bilimingizni Sinovdan O'tkazing" %}</h1>
+    <p>{% blocktrans %}Django, Python va boshqa dasturlash tillari bo'yicha eng mukammal test platformasi. O'zingizni rivojlantiring va natijalaringizni kuzatib boring.{% endblocktrans %}</p>
+    <a href="#subjects" class="btn btn-primary">{% trans "Boshlash" %} <i class="fas fa-arrow-right"
             style="margin-left: 0.5rem;"></i></a>
 </div>
 
 <div id="subjects" class="animate-fade-in" style="animation-delay: 0.2s;">
-    <h2 style="margin-bottom: 2rem; text-align: center;">Mavjud fanlar</h2>
+    <h2 style="margin-bottom: 2rem; text-align: center;">{% trans "Mavjud fanlar" %}</h2>
 
     <div class="grid grid-cols-2">
         {% for subject in subjects %}
@@ -31,9 +30,9 @@
                 <p style="margin-bottom: 1.5rem;">{{ subject.description|truncatewords:20 }}</p>
 
                 <div class="d-flex justify-content-between align-items-center">
-                    <span class="badge badge-primary">{{ subject.modules.count }} ta modul</span>
+                    <span class="badge badge-primary">{{ subject.modules.count }} {% trans "ta modul" %}</span>
                     <a href="{% url 'quiz:subject_detail' subject.slug %}" class="btn btn-secondary">
-                        Kirish <i class="fas fa-chevron-right" style="margin-left: 0.5rem;"></i>
+                        {% trans "Kirish" %} <i class="fas fa-chevron-right" style="margin-left: 0.5rem;"></i>
                     </a>
                 </div>
             </div>
@@ -41,8 +40,8 @@
         {% empty %}
         <div class="card" style="grid-column: 1 / -1; text-align: center; padding: 4rem;">
             <i class="fas fa-folder-open fa-3x" style="color: var(--text-muted); margin-bottom: 1rem;"></i>
-            <h3>Hozircha fanlar mavjud emas</h3>
-            <p>Admin tomonidan fanlar qo'shilishini kuting.</p>
+            <h3>{% trans "Hozircha fanlar mavjud emas" %}</h3>
+            <p>{% trans "Admin tomonidan fanlar qo'shilishini kuting." %}</p>
         </div>
         {% endfor %}
     </div>

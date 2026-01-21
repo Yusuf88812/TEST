@@ -1,40 +1,63 @@
 {% extends 'quiz/base.html' %}
-{% load static %}
+{% load static i18n %}
 
 {% block content %}
 <div class="animate-fade-in text-center" style="padding: 3rem 0;">
     <div class="card" style="max-width: 600px; margin: 0 auto; text-align: center;">
-        <h2 style="margin-bottom: 2rem;">Test Natijalari</h2>
+        <h2 style="margin-bottom: 2rem;">{% trans "Test Natijalari" %}</h2>
 
         <div
-            style="position: relative; width: 200px; height: 200px; margin: 0 auto 2rem; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: conic-gradient(var(--primary) {{ attempt.score }}%, rgba(255,255,255,0.1) 0);">
+            style="position: relative; width: 200px; height: 200px; margin: 0 auto 2rem; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: conic-gradient(var(--primary) {{ percentage|floatformat:0 }}%, rgba(255,255,255,0.1) 0);">
             <div
                 style="width: 180px; height: 180px; background: var(--bg-card); border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; position: absolute;">
-                <span style="font-size: 3rem; font-weight: 800; color: var(--primary);">{{ attempt.score }}</span>
-                <span style="font-size: 1rem; color: var(--text-muted);">Ball</span>
+                <span style="font-size: 3rem; font-weight: 800; color: var(--primary);">
+                    {{ percentage|floatformat:0 }}%
+                </span>
+                <span style="font-size: 1rem; color: var(--text-muted); margin-top: 0.5rem;">
+                    {{ attempt.score }} / {{ total_marks }} {% trans "Ball" %}
+                </span>
             </div>
         </div>
 
         <h3 style="margin-bottom: 0.5rem;">{{ attempt.first_name }} {{ attempt.last_name }}</h3>
-        <p style="color: var(--text-muted); margin-bottom: 2rem;">{{ attempt.module.subject.name }} - {{attempt.module.name }}</p>
+        <p style="color: var(--text-muted); margin-bottom: 2rem;">{{ attempt.module.subject.name }} -
+            {{attempt.module.name }}</p>
 
         <div class="grid grid-cols-2" style="margin-bottom: 2rem; gap: 1rem;">
             <div style="background: rgba(16, 185, 129, 0.1); padding: 1rem; border-radius: var(--radius-md);">
-                <span style="display: block; font-size: 1.5rem; font-weight: 700; color: var(--success);">{{ attempt.correct_answers }}</span>
-                <span style="font-size: 0.875rem;">To'g'ri</span>
+                <span style="display: block; font-size: 1.5rem; font-weight: 700; color: var(--success);">{{attempt.correct_answers }}</span>
+                <span style="font-size: 0.875rem;">{% trans "To'g'ri" %}</span>
             </div>
             <div style="background: rgba(255, 255, 255, 0.05); padding: 1rem; border-radius: var(--radius-md);">
-                <span style="display: block; font-size: 1.5rem; font-weight: 700; color: var(--text-main);">{{ attempt.total_questions }}</span>
-                <span style="font-size: 0.875rem;">Jami Savollar</span>
+                <span style="display: block; font-size: 1.5rem; font-weight: 700; color: var(--text-main);">{{attempt.total_questions }}</span>
+                <span style="font-size: 0.875rem;">{% trans "Jami Savollar" %}</span>
             </div>
+        </div>
+
+        <div style="margin-bottom: 2rem;">
+            {% if passed %}
+            <div
+                style="padding: 1rem; background: rgba(16, 185, 129, 0.2); border-radius: var(--radius-md); border: 1px solid var(--success);">
+                <h3 style="color: var(--success); margin: 0;"><i class="fas fa-check-circle"></i> {% trans
+                    "Muvaffaqiyatli o'tdingiz!" %}</h3>
+            </div>
+            {% else %}
+            <div
+                style="padding: 1rem; background: rgba(239, 68, 68, 0.2); border-radius: var(--radius-md); border: 1px solid var(--danger);">
+                <h3 style="color: var(--danger); margin: 0;"><i class="fas fa-times-circle"></i> {% trans "Afsuski,
+                    yiqildingiz." %}</h3>
+                <p style="margin: 0.5rem 0 0; font-size: 0.9em;">{% trans "Qayta urinib ko'rishni maslahat beramiz." %}
+                </p>
+            </div>
+            {% endif %}
         </div>
 
         <div class="d-flex justify-content-center gap-3">
             <a href="{% url 'quiz:test_result_detail' attempt.id %}" class="btn btn-secondary">
-                <i class="fas fa-list-alt" style="margin-right: 0.5rem;"></i> Batafsil Ko'rish
+                <i class="fas fa-list-alt" style="margin-right: 0.5rem;"></i> {% trans "Batafsil Ko'rish" %}
             </a>
             <a href="{% url 'quiz:home' %}" class="btn btn-primary">
-                <i class="fas fa-home" style="margin-right: 0.5rem;"></i> Bosh Sahifa
+                <i class="fas fa-home" style="margin-right: 0.5rem;"></i> {% trans "Bosh Sahifa" %}
             </a>
         </div>
     </div>

@@ -1,5 +1,5 @@
 {% extends 'quiz/base.html' %}
-{% load static %}
+{% load static i18n %}
 
 {% block content %}
 <div class="animate-fade-in">
@@ -9,22 +9,22 @@
         </div>
         <div>
             <h1>{{ user.username }}</h1>
-            <p style="margin-bottom: 0;">Foydalanuvchi hisobi</p>
+            <p style="margin-bottom: 0;">{% trans "Foydalanuvchi hisobi" %}</p>
         </div>
     </div>
 
     <div class="grid grid-cols-2" style="margin-bottom: 3rem;">
         <div class="card result-stat-card">
             <div class="stat-value">{{ total_attempts }}</div>
-            <div class="stat-label">Jami Urinishlar</div>
+            <div class="stat-label">{% trans "Jami Urinishlar" %}</div>
         </div>
         <div class="card result-stat-card">
             <div class="stat-value">{{ total_score }}</div>
-            <div class="stat-label">Jami Ball</div>
+            <div class="stat-label">{% trans "Jami Ball" %}</div>
         </div>
     </div>
 
-    <h2 style="margin-bottom: 1.5rem;">So'nggi Natijalar</h2>
+    <h2 style="margin-bottom: 1.5rem;">{% trans "So'nggi Natijalar" %}</h2>
 
     <div class="card" style="padding: 1rem;">
         {% if attempts %}
@@ -40,7 +40,7 @@
             </div>
             <div style="text-align: right;">
                 <div style="font-weight: 700; color: var(--primary); font-size: 1.25rem;">
-                    {{ attempt.score }} ball
+                    {{ attempt.score }} {% trans "ball" %}
                 </div>
                 <div style="font-size: 0.875rem; color: var(--text-muted);">
                     {{ attempt.correct_answers }} / {{ attempt.total_questions }}
@@ -49,13 +49,13 @@
             <div style="margin-left: 1rem;">
                 <a href="{% url 'quiz:test_result' attempt.id %}" class="btn btn-secondary"
                     style="padding: 0.5rem 1rem; font-size: 0.75rem;">
-                    Ko'rish
+                    {% trans "Ko'rish" %}
                 </a>
             </div>
         </div>
         {% endfor %}
         {% else %}
-        <p style="padding: 2rem; text-align: center;">Hozircha testlar topshirilmagan.</p>
+        <p style="padding: 2rem; text-align: center;">{% trans "Hozircha testlar topshirilmagan." %}</p>
         {% endif %}
     </div>
 </div>

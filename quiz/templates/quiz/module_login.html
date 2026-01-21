@@ -1,5 +1,5 @@
 {% extends 'quiz/base.html' %}
-{% load static %}
+{% load static i18n %}
 
 {% block content %}
 <div class="animate-fade-in d-flex justify-content-center align-items-center" style="min-height: 60vh;">
@@ -9,7 +9,7 @@
                 style="width: 60px; height: 60px; background: rgba(99, 102, 241, 0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem;">
                 <i class="fas fa-user-circle fa-2x" style="color: var(--primary);"></i>
             </div>
-            <h2 style="margin-bottom: 0.5rem;">Testni Boshlash</h2>
+            <h2 style="margin-bottom: 0.5rem;">{% trans "Testni Boshlash" %}</h2>
             <p>{{ module.subject.name }} - {{ module.name }}</p>
         </div>
 
@@ -17,27 +17,29 @@
             <form method="post">
                 {% csrf_token %}
                 <div class="form-group">
-                    <label for="first_name" class="form-label">Ismingiz</label>
+                    <label for="first_name" class="form-label">{% trans "Ismingiz" %}</label>
                     <input type="text" name="first_name" id="first_name" class="form-control"
-                        placeholder="Ismingizni kiriting" required>
+                        placeholder="{% trans 'Ismingizni kiriting' %}" required>
                 </div>
 
                 <div class="form-group">
-                    <label for="last_name" class="form-label">Familiyangiz</label>
+                    <label for="last_name" class="form-label">{% trans "Familiyangiz" %}</label>
                     <input type="text" name="last_name" id="last_name" class="form-control"
-                        placeholder="Familiyangizni kiriting" required>
+                        placeholder="{% trans 'Familiyangizni kiriting' %}" required>
                 </div>
 
                 <div style="margin-top: 2rem;">
                     <p
                         style="font-size: 0.875rem; color: var(--text-muted); margin-bottom: 1.5rem; text-align: center;">
-                        <i class="fas fa-info-circle"></i> Sizga {{ module.duration }} daqiqa vaqt beriladi.
+                        <i class="fas fa-info-circle"></i> {% blocktrans with duration=module.duration %}Sizga {{
+                        duration }} daqiqa vaqt beriladi.{% endblocktrans %}
                     </p>
                     <button type="submit" class="btn btn-primary btn-block" style="width: 100%;">
-                        Testni Boshlash
+                        {% trans "Testni Boshlash" %}
                     </button>
                     <a href="{% url 'quiz:subject_detail' module.subject.slug %}" class="btn btn-secondary btn-block"
-                        style="width: 100%; margin-top: 1rem; text-align: center; display: block;">Bekor Qilish</a>
+                        style="width: 100%; margin-top: 1rem; text-align: center; display: block;">{% trans "Bekor
+                        Qilish" %}</a>
                 </div>
             </form>
         </div>

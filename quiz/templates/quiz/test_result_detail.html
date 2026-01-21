@@ -1,18 +1,18 @@
 {% extends 'quiz/base.html' %}
-{% load static %}
+{% load static i18n %}
 
 {% block content %}
 <div class="animate-fade-in">
     <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 2rem;">
-        <h1>Natijalar Tahlili</h1>
+        <h1>{% trans "Natijalar Tahlili" %}</h1>
         <a href="{% url 'quiz:test_result' attempt.id %}" class="btn btn-secondary">
-            <i class="fas fa-arrow-left"></i> Orqaga
+            <i class="fas fa-arrow-left"></i> {% trans "Orqaga" %}
         </a>
     </div>
 
     <div class="result-header">
         <h2 style="margin-bottom: 0.5rem; font-size: 1.5rem;">{{ attempt.module.name }}</h2>
-        <p>Test yakunlandi: {{ attempt.date_taken|date:"d.m.Y H:i" }}</p>
+        <p>{% trans "Test yakunlandi" %}: {{ attempt.date_taken|date:"d.m.Y H:i" }}</p>
     </div>
 
     {% for answer in answers %}
@@ -20,37 +20,42 @@
         <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 1rem;">
             <span
                 style="font-size: 0.875rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em;">
-                Savol {{ forloop.counter }}
+                {% trans "Savol" %} {{ forloop.counter }}
             </span>
             {% if answer.is_correct %}
             <span class="badge badge-success">
-                <i class="fas fa-check"></i> To'g'ri (+{{ answer.question.marks }})
+                <i class="fas fa-check"></i> {% blocktrans with marks=answer.question.marks %}To'g'ri (+{{ marks }}){%
+                endblocktrans %}
             </span>
             {% else %}
             <span class="badge" style="background: rgba(239, 68, 68, 0.2); color: var(--danger);">
-                <i class="fas fa-times"></i> Noto'g'ri
+                <i class="fas fa-times"></i> {% trans "Noto'g'ri" %}
             </span>
             {% endif %}
         </div>
 
-        <div class="question-text">{{ answer.question.text|linebreaks }}</div>
+        <div class="question-text" style="margin-top: 1rem; margin-bottom: 1rem; font-size: 1.1rem; font-weight: 500;">
+            {{ answer.question.text|linebreaks }}
+        </div>
 
         {% if answer.question.question_type == 'MCQ' %}
         <div class="user-choice-box">
-            <p style="margin-bottom: 0.5rem; font-size: 0.875rem; color: var(--text-muted);">Sizning javobingiz:</p>
+            <p style="margin-bottom: 0.5rem; font-size: 0.875rem; color: var(--text-muted);">{% trans "Sizning
+                javobingiz:" %}</p>
             <div
                 style="font-weight: 500; font-size: 1.1rem; color: {% if answer.is_correct %}var(--success){% else %}var(--danger){% endif %};">
                 {% if answer.selected_choice %}
                 {{ answer.selected_choice.text }}
                 {% else %}
-                <span style="opacity: 0.7; font-style: italic;">Javob belgilanmagan</span>
+                <span style="opacity: 0.7; font-style: italic;">{% trans "Javob belgilanmagan" %}</span>
                 {% endif %}
             </div>
         </div>
 
         {% if not answer.is_correct %}
         <div class="correct-choice-box">
-            <p style="margin-bottom: 0.5rem; font-size: 0.875rem; color: var(--text-muted);">To'g'ri javob:</p>
+            <p style="margin-bottom: 0.5rem; font-size: 0.875rem; color: var(--text-muted);">{% trans "To'g'ri javob:"
+                %}</p>
             {% for choice in answer.question.choices.all %}
             {% if choice.is_correct %}
             <div style="color: var(--success); font-weight: 600; font-size: 1.1rem;">
@@ -63,7 +68,7 @@
 
         {% elif answer.question.question_type == 'CODE' %}
         <div style="margin-top: 1rem;">
-            <p style="margin-bottom: 0.5rem; color: var(--text-muted);">Sizning yechimingiz:</p>
+            <p style="margin-bottom: 0.5rem; color: var(--text-muted);">{% trans "Sizning yechimingiz:" %}</p>
             <pre>{{ answer.code_answer }}</pre>
         </div>
         {% endif %}

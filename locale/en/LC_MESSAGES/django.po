@@ -1,0 +1,200 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-10-27 12:00+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "DevQuiz - Dasturlashni o'rganing"
+msgstr "DevQuiz - Learn Programming"
+
+msgid "Bosh sahifa"
+msgstr "Home"
+
+msgid "Reyting"
+msgstr "Leaderboard"
+
+msgid "Chiqish"
+msgstr "Logout"
+
+msgid "Kirish"
+msgstr "Login"
+
+msgid "Ro'yxatdan o'tish"
+msgstr "Sign Up"
+
+msgid "DevQuiz Platformasi. Barcha huquqlar himoyalangan."
+msgstr "DevQuiz Platform. All rights reserved."
+
+msgid "O'zbekistonning eng zamonaviy dasturlash test platformasi"
+msgstr "Uzbekistan's most modern programming test platform"
+
+msgid "Bilimingizni Sinovdan O'tkazing"
+msgstr "Test Your Knowledge"
+
+msgid "Django, Python va boshqa dasturlash tillari bo'yicha eng mukammal test platformasi. O'zingizni rivojlantiring va natijalaringizni kuzatib boring."
+msgstr "The most perfect test platform for Django, Python and other programming languages. Improve yourself and track your results."
+
+msgid "Boshlash"
+msgstr "Start"
+
+msgid "Mavjud fanlar"
+msgstr "Available Subjects"
+
+msgid "ta modul"
+msgstr "modules"
+
+msgid "Hozircha fanlar mavjud emas"
+msgstr "No subjects available yet"
+
+msgid "Admin tomonidan fanlar qo'shilishini kuting."
+msgstr "Wait for subjects to be added by the admin."
+
+msgid "Foydalanuvchi hisobi"
+msgstr "User Account"
+
+msgid "Jami Urinishlar"
+msgstr "Total Attempts"
+
+msgid "Jami Ball"
+msgstr "Total Score"
+
+msgid "So'nggi Natijalar"
+msgstr "Recent Results"
+
+msgid "ball"
+msgstr "points"
+
+msgid "Ko'rish"
+msgstr "View"
+
+msgid "Hozircha testlar topshirilmagan."
+msgstr "No tests taken yet."
+
+msgid "O'rin"
+msgstr "Rank"
+
+msgid "Foydalanuvchi"
+msgstr "User"
+
+msgid "Modul"
+msgstr "Module"
+
+msgid "Ball"
+msgstr "Score"
+
+msgid "Vaqt"
+msgstr "Time"
+
+msgid "Hozircha natijalar yo'q."
+msgstr "No results yet."
+
+msgid "Testni Boshlash"
+msgstr "Start Test"
+
+msgid "Ismingiz"
+msgstr "Your Name"
+
+msgid "Ismingizni kiriting"
+msgstr "Enter your name"
+
+msgid "Familiyangiz"
+msgstr "Your Surname"
+
+msgid "Familiyangizni kiriting"
+msgstr "Enter your surname"
+
+#, python-format
+msgid "Sizga %(duration)s daqiqa vaqt beriladi."
+msgstr "You are given %(duration)s minutes."
+
+msgid "Bekor Qilish"
+msgstr "Cancel"
+
+msgid "Orqaga"
+msgstr "Back"
+
+msgid "Qiyinlik Darajalari"
+msgstr "Difficulty Levels"
+
+msgid "daqiqa"
+msgstr "minutes"
+
+msgid "ta savol"
+msgstr "questions"
+
+msgid "Ushbu fan bo'yicha testlar hali mavjud emas."
+msgstr "No tests available for this subject yet."
+
+msgid "Javoblar"
+msgstr "Answers"
+
+msgid "Fan"
+msgstr "Subject"
+
+msgid "Nomzod"
+msgstr "Candidate"
+
+msgid "Savol"
+msgstr "Question"
+
+msgid "Kodingizni shu yerga yozing:"
+msgstr "Write your code here:"
+
+msgid "Testni Yakunlash"
+msgstr "Finish Test"
+
+msgid "Vaqt tugadi! Javoblar avtomatik yuborilmoqda."
+msgstr "Time is up! Answers are being submitted automatically."
+
+msgid "Test Natijalari"
+msgstr "Test Results"
+
+msgid "Jami Savollar"
+msgstr "Total Questions"
+
+msgid "Batafsil Ko'rish"
+msgstr "View Details"
+
+msgid "Bosh Sahifa"
+msgstr "Home Page"
+
+msgid "Natijalar Tahlili"
+msgstr "Results Analysis"
+
+msgid "Test yakunlandi"
+msgstr "Test Completed"
+
+msgid "To'g'ri"
+msgstr "Correct"
+
+msgid "Noto'g'ri"
+msgstr "Incorrect"
+
+msgid "Sizning javobingiz:"
+msgstr "Your Answer:"
+
+msgid "Javob belgilanmagan"
+msgstr "No answer selected"
+
+msgid "To'g'ri javob:"
+msgstr "Correct Answer:"
+
+msgid "Sizning yechimingiz:"
+msgstr "Your Solution:"
+
+msgid "O'zbek"
+msgstr "Uzbek"
+
+msgid "Русский"
+msgstr "Russian"
+
+msgid "English"
+msgstr "English"

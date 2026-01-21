@@ -1,11 +1,11 @@
-{% load static %}
+{% load static i18n %}
 <!DOCTYPE html>
 <html lang="uz">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}DevQuiz - Dasturlashni o'rganing{% endblock %}</title>
+    <title>{% block title %}{% trans "DevQuiz - Dasturlashni o'rganing" %}{% endblock %}</title>
     <!-- Fonts & Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
@@ -13,30 +13,27 @@
 
 <body>
 
-    <!-- Navbar -->
-    <nav class="navbar">
-        <div class="container nav-container">
-            <a href="{% url 'quiz:home' %}" class="nav-brand">
-                <i class="fas fa-code-branch"></i> DevQuiz
-            </a>
-            <div class="nav-links">
-                <a href="{% url 'quiz:home' %}" class="nav-link">Bosh sahifa</a>
-                <a href="{% url 'quiz:leaderboard' %}" class="nav-link">Reyting</a>
-                {% if user.is_authenticated %}
-                <span class="nav-link" style="opacity: 0.7;">{{ user.username }}</span>
-                <form action="{% url 'accounts:logout' %}" method="post" style="display:inline;">
-                    {% csrf_token %}
-                    <button type="submit" class="nav-link btn-link"
-                        style="background:none; border:none; cursor:pointer;">Chiqish</button>
-                </form>
-                {% else %}
-                <a href="{% url 'accounts:login' %}" class="nav-link">Kirish</a>
-                <a href="{% url 'accounts:signup' %}" class="btn btn-primary"
-                    style="padding: 0.5rem 1rem; border-radius: 20px;">Ro'yxatdan o'tish</a>
-                {% endif %}
-            </div>
+    {% load i18n %}
+
+    <form action="{% url 'set_language' %}" method="post" style="display:inline; margin-left: 10px;">
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{{ request.path }}">
+
+        <div class="language-switcher">
+            <i class="fas fa-globe"
+                style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: var(--text-muted); pointer-events: none; z-index: 1;"></i>
+            <select name="language" onchange="this.form.submit()" style="padding-left: 2.5rem;">
+                {% get_current_language as LANGUAGE_CODE %}
+                {% get_available_languages as LANGUAGES %}
+                {% get_language_info_list for LANGUAGES as languages %}
+                {% for language in languages %}
+                <option value="{{ language.code }}">
+                    {{ language.name_local }} ({{ language.code|upper }})
+                </option>
+                {% endfor %}
+            </select>
         </div>
-    </nav>
+    </form>
 
     <!-- Main Content -->
     <main class="container" style="flex: 1; padding-top: 2rem; padding-bottom: 2rem;">
@@ -47,9 +44,9 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <p>&copy; {% now "Y" %} DevQuiz Platformasi. Barcha huquqlar himoyalangan.</p>
+            <p>&copy; {% now "Y" %} {% trans "DevQuiz Platformasi. Barcha huquqlar himoyalangan." %}</p>
             <p style="font-size: 0.875rem; margin-top: 0.5rem; opacity: 0.7;">
-                O'zbekistonning eng zamonaviy dasturlash test platformasi
+                {% trans "O'zbekistonning eng zamonaviy dasturlash test platformasi" %}
             </p>
         </div>
     </footer>
